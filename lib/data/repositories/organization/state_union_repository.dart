@@ -7,12 +7,7 @@ class StateUnionRepository {
   $$StateUnionsTableTableManager get _manager => _db.managers.stateUnions;
 
   StateUnionsCompanion prepareData(Map<String, dynamic> data) {
-    return StateUnionsCompanion(
-      id: data['id'] != null ? Value(data['id']) : Value.absent(),
-      state: Value(data['state']),
-      acronym: Value(data['acronym']),
-      unionId: Value(data['unionId']),
-    );
+    return StateUnion.fromJson(data).toCompanion(true);
   }
 
   Future<int> save(StateUnionsCompanion stateUnion) async {

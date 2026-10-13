@@ -15,7 +15,6 @@ class DivisionSeeder {
 
   Future<void> run() async {
     list = datas.map((d) => _divisionRepository.prepareData(d)).toList();
-
     await _divisionRepository.saveAll(list);
   }
 }

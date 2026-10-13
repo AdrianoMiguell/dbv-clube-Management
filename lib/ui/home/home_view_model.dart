@@ -9,42 +9,44 @@ import 'package:dbv_clube_management/data/database/models/users.dart';
 import 'package:dbv_clube_management/data/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeViewModel extends GetxController {
   RxInt valuePages = 0.obs;
   final _service = Get.find<AuthService>();
 
   Rxn<User> get user => _service.user;
-  UserFunction? get function {
-    return user.value?.function;
-  }
+  UserFunction? get function => user.value?.function;
 
   bool get isAdmin => function == UserFunction.administrator;
 
-  final RxMap<int, Widget> mapPages = {
-    0: InitialPage(),
-    1: ServicesPage(),
-    2: SettingsPage(),
-  }.obs;
+  final Map<int, Widget Function()> mapPages = {
+    0: () => const InitialPage(),
+    1: () => const ServicesPage(),
+    2: () => const SettingsPage(),
+  };
 
-  final RxMap<int, Widget> adminMapPages = {
-    0: AdminInitialPage(),
-    1: AdminServicesPage(),
-    2: AdminSettingsPage(),
-  }.obs;
+  final Map<int, Widget Function()> adminMapPages = {
+    0: () => const AdminInitialPage(),
+    1: () => const AdminServicesPage(),
+    2: () => const AdminSettingsPage(),
+  };
 
-  Widget get currentPage =>
-      (isAdmin
-          ? adminMapPages[valuePages.value]
-          : mapPages[valuePages.value]) ??
-      Container();
+  Widget get currentPage {
+    final targetMap = isAdmin ? adminMapPages : mapPages;
+    final pageBuilder = targetMap[valuePages.value];
+
+    return pageBuilder != null ? pageBuilder() : const SizedBox.shrink();
+  }
 
   @override
-  void onInit() async {
+  void onInit() {
     _init();
     super.onInit();
   }
 
   Future<void> _init() async {}
+
+  void changePage(int index) {
+    valuePages.value = index;
+  }
 }

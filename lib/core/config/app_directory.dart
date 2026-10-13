@@ -9,6 +9,7 @@ class AppDirectory {
     final baseDir = await getTemporaryDirectory();
     debugPrint('🚩 Base Dir : ${baseDir.path}');
     final joinDir = join(baseDir.path, 'dbv_club_management');
+    debugPrint("joinDir : $joinDir");
     final appDir = Directory(joinDir);
     if (!(await appDir.exists())) {
       await appDir.create(recursive: true);

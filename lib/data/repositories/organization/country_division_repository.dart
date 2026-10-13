@@ -8,12 +8,13 @@ class CountryDivisionRepository {
       _db.managers.countryDivisions;
 
   CountryDivisionsCompanion prepareData(Map<String, dynamic> data) {
-    return CountryDivisionsCompanion(
-      id: data['id'] != null ? Value(data['id']) : Value.absent(),
-      country: Value(data['country']),
-      acronym: Value(data['acronym']),
-      divisionId: Value(data['divisionId']),
-    );
+    return CountryDivision.fromJson(data).toCompanion(true);
+    // return CountryDivisionsCompanion(
+    //   id: data['id'] != null ? Value(data['id']) : Value.absent(),
+    //   country: Value(data['country']),
+    //   acronym: Value(data['acronym']),
+    //   divisionId: Value(data['divisionId']),
+    // );
   }
 
   Future<int> save(CountryDivisionsCompanion countryDivision) async {

@@ -6,7 +6,7 @@ class StateUnionSeeder {
   final StateUnionRepository _stateUnionRepository = StateUnionRepository();
 
   List<Map<String, dynamic>> datas = [
-    {'id': 1, 'state': "Pernambuco", 'unionId': 1},
+    {'id': 1, 'state': "Pernambuco", 'acronym': 'PE', 'unionId': 1},
   ];
 
   Future<void> run() async {

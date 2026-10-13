@@ -1,4 +1,3 @@
-import 'package:dbv_clube_management/core/utils/drift_absent_value.dart';
 import 'package:dbv_clube_management/data/database/database.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/rendering.dart';
@@ -9,12 +8,7 @@ class AssociationRepository {
   $$AssociationsTableTableManager get _manager => _db.managers.associations;
 
   AssociationsCompanion prepareData(Map<String, dynamic> data) {
-    return AssociationsCompanion(
-      id: (data['id'] as int?).toValue(),
-      name: (data['name'] as String?).toValue(),
-      acronym: (data['acronym'] as String?).toValue(),
-      unionId: (data['unionId'] as int?).toValue(),
-    );
+    return Association.fromJson(data).toCompanion(true);
   }
 
   Future<int> save(AssociationsCompanion association) async {
@@ -66,9 +60,7 @@ class AssociationRepository {
 
     return await _manager
         .filter(
-          (item) =>
-              item.acronym.contains(query) |
-              item.name.contains(query)
+          (item) => item.acronym.contains(query) | item.name.contains(query),
         )
         .get();
   }

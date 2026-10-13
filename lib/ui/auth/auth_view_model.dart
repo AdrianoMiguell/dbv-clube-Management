@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthViewModel extends GetxController {
-  final AuthService _service = AuthService();
+  final AuthService _service = Get.find<AuthService>();
 
   final nameController = TextEditingController(text: "Adriano Miguel");
   final emailController = TextEditingController(text: "adrianos@gmail.com");
   final passwordController = TextEditingController(text: "adrianos");
-
-  final formKey = GlobalKey<FormState>();
 
   UserFunction function = UserFunction.user;
 
@@ -58,7 +56,7 @@ class AuthViewModel extends GetxController {
 
     await Future.delayed(Duration(milliseconds: 25));
     isLoading.value = false;
-    Get.toNamed("/home");
+    Get.offAndToNamed("/home");
   }
 
   void get logout => _service.logout();
@@ -70,7 +68,6 @@ class AuthViewModel extends GetxController {
 
   String? validatePassword(String v) {
     if (v.length < 8) return "A senha deve ter mais de 8 caracteres";
-
     return null;
   }
 

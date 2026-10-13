@@ -6,7 +6,10 @@ import 'package:get/get.dart';
 
 class AuthView extends GetView<AuthViewModel> {
   const AuthView({super.key});
+
   AuthViewModel get vm => super.controller;
+
+  static final formKey = GlobalKey<FormState>();
 
   // TODO("Configurar as mensagens do app")
 
@@ -59,7 +62,7 @@ class AuthView extends GetView<AuthViewModel> {
                     child: SingleChildScrollView(
                       child: Center(
                         child: Form(
-                          key: vm.formKey,
+                          key: formKey,
                           child: Container(
                             constraints: BoxConstraints(
                               minWidth: 200,
@@ -187,7 +190,7 @@ class AuthView extends GetView<AuthViewModel> {
                                                 .infinity, // 👈 adicione isso
                                             child: ElevatedButton.icon(
                                               onPressed: () {
-                                                if (!vm.formKey.currentState!
+                                                if (!formKey.currentState!
                                                     .validate()) {
                                                   return;
                                                 }

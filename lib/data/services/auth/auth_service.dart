@@ -4,7 +4,6 @@ import 'package:bcrypt/bcrypt.dart';
 import 'package:dbv_clube_management/data/database/database.dart';
 import 'package:dbv_clube_management/data/database/models/users.dart';
 import 'package:dbv_clube_management/data/repositories/auth/user_repository.dart';
-import 'package:drift/drift.dart' as drift;
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -9,11 +9,14 @@ class FunctionMemberRepository {
       _db.managers.functionMembers;
 
   FunctionMembersCompanion prepareData(Map<String, dynamic> data) {
-    return FunctionMembersCompanion(
-      id: (data['id'] as int?).toValue(),
-      name: (data['name'] as String?).toValue(),
-      desc: (data['desc'] as String?).toValue(),
-    );
+    return FunctionMember.fromJson(data).toCompanion(true);
+
+    // DivisionsCompanion prepareData(Map<String, dynamic> data) =>
+    //     Division.fromJson(data).toCompanion(true);
+    //   id: (data['id'] as int?).toValue(),
+    //   name: (data['name'] as String?).toValue(),
+    //   desc: (data['desc'] as String?).toValue(),
+    // );
   }
 
   Future<void> save(function) async {

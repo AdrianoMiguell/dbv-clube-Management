@@ -7,7 +7,7 @@ class CountryDivisionSeeder {
       CountryDivisionRepository();
 
   List<Map<String, dynamic>> datas = [
-    {'id': 1, 'country': "Brasil", 'divisionId': 1},
+    {'id': 1, 'country': "Brasil", 'acronym': 'BR', 'divisionId': 1},
   ];
 
   Future<void> run() async {

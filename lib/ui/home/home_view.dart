@@ -12,15 +12,13 @@ class HomeView extends StatelessWidget {
     final HomeViewModel vm = Get.find<HomeViewModel>();
 
     return MainLayout(
-      appBar: AppBar(title: Text("DBV MANAGER"), leading: null),
+      appBar: AppBar(
+        title: Text("DBV MANAGER"),
+        automaticallyImplyLeading: false,
+      ),
       body: Obx(() => vm.currentPage),
       bottomNavBar: BottomNavigationBarWidget(
-        onTap: (value) {
-          if (value != vm.valuePages.value) {
-            debugPrint("Pages : $value");
-            vm.valuePages.value = value;
-          }
-        },
+        onTap: (value) => vm.changePage(value),
       ),
     );
   }
